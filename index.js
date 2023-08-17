@@ -10,7 +10,7 @@ app.listen(PORT,()=> console.log(`server is running on port ${PORT}`));
 app.use(express.json());
 
 // Set up routes
-app.use('/employee', bookRoutes);
+app.use('/employee', employeeRoutes);
 
 // Handle invalid routes
 app.use((req, res) => {
