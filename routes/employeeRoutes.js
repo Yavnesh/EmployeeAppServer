@@ -18,7 +18,8 @@ router.get('/', async (req, res) => {
 router.post('/add', async (req, res) => {
     try {
       const newEmployee = await Employee.create(req.body);
-      res.status(201).json({message: 'Employee added successfully'});
+      const allEmployees = await Employee.find();
+      res.status(201).json({message: 'Employee added successfully', allEmployees: allEmployees});
     } catch (error) {
       res.status(500).json({ message: 'Error adding employee', error: error.message });
     }
@@ -31,7 +32,8 @@ router.put('/update/:id', async (req, res) => {
       if (!updatedEmployee) {
         return res.status(404).json({ message: 'Employee not found' });
       }
-      res.status(200).json({message: 'Employee updated successfully'});
+      const allEmployees = await Employee.find();
+      res.status(200).json({message: 'Employee updated successfully', allEmployees: allEmployees});
     } catch (err) {
       res.status(400).json({ error: err.message });
     }
@@ -44,7 +46,8 @@ try {
     if (!deletedEmployee) {
     return res.status(404).json({ message: 'Employee not found' });
     }
-    res.status(200).json({ message: 'Employee deleted successfully' });
+    const allEmployees = await Employee.find();
+    res.status(200).json({ message: 'Employee deleted successfully' , allEmployees: allEmployees});
 } catch (err) {
     res.status(500).json({ error: err.message });
 }
