@@ -3,15 +3,6 @@ const router = express.Router();
 const db = require('../db');
 const Employee = require('../models/employee');
 
-// Add new employee
-router.post('/add', async (req, res) => {
-    try {
-      const newEmployee = await Employee.create(req.body);
-      res.status(201).json({message: 'Employee added successfully'});
-    } catch (error) {
-      res.status(500).json({ message: 'Error adding employee', error: error.message });
-    }
-});
 
 // Fetch all employee
 router.get('/', async (req, res) => {
@@ -20,6 +11,16 @@ router.get('/', async (req, res) => {
     res.status(200).json({ message: 'Employee fetched successfully', allEmployees: allEmployees });
     } catch (error) {
     res.status(500).json({ message: 'Error fetching employee data', error: error.message });
+    }
+});
+
+// Add new employee
+router.post('/add', async (req, res) => {
+    try {
+      const newEmployee = await Employee.create(req.body);
+      res.status(201).json({message: 'Employee added successfully'});
+    } catch (error) {
+      res.status(500).json({ message: 'Error adding employee', error: error.message });
     }
 });
 
